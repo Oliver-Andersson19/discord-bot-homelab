@@ -18,20 +18,20 @@ export default {
 
         let reply = ``
         
-        reply += `**Temperatures**\n`;
+        reply += `**🌡️  Temperatures**\n`;
         reply += `Motherboard Zone 0: ${proxmoxTemp.zone0}\n`
         reply += `Motherboard Zone 1: ${proxmoxTemp.zone1}\n`
         reply += `CPU: ${proxmoxTemp.cpu}\n\n`
         
-        reply += `**Network Status**\n`;
+        reply += `**📡  Network Status**\n`;
         reply += `Total Connected Clients: ${totalNetworkUsers}\n\n`;
 
-        reply += `**CPU Usage**\n`;
-        reply += `Percentage: ${cpuUsagePercent}\n`;
+        reply += `**🧠  CPU**\n`;
+        reply += `Usage Percentage: ${cpuUsagePercent}%\n`;
         reply += `Temp: ${proxmoxTemp.cpu}\n\n`
         
         
-        reply += `**Memory Usage**\n`;
+        reply += `**💾  Memory Usage**\n`;
         reply += `${memoryUsageGB}\n\n`;
 
     //   reply += `**UniFi Device Temperatures:**\n`;
