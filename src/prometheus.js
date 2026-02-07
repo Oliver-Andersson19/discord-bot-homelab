@@ -51,3 +51,22 @@ export async function getProxmoxTemps() {
 
     return temps;
 }
+
+export async function checkForNewDevices() {
+    const result = await fetchPrometheus('unpoller_client_uptime_seconds');
+    if (!result || result.length === 0) return 'No clients data';
+
+    const clients = result.map((c) => {   
+        const name = c.metric.name || 'Unknown device';
+        const wired = c.metric.wired || 'Unknown';
+        const network = c.metric.network || 'Unknown'
+        const ip = c.metric.ip || 'Unknown'
+        
+
+        return `${wired === "true" ? '🔌' : '📶'}  **${name}** on Network: **${network}** - IP: **${ip}** \n`;
+    })
+
+    console.log(clients)
+
+    return clients.join('');
+}

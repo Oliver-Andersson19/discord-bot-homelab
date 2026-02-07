@@ -1,4 +1,4 @@
-import { getTotalUniFiUsers, getMemoryUsageGB, getCpuUsagePercent, getProxmoxTemps } from "../prometheus.js";
+import { getTotalUniFiUsers, getMemoryUsageGB, getCpuUsagePercent, getProxmoxTemps, checkForNewDevices } from "../prometheus.js";
 
 export default {
   name: "status",
@@ -15,6 +15,7 @@ export default {
         const memoryUsageGB = await getMemoryUsageGB();
         const cpuUsagePercent = await getCpuUsagePercent();
         const proxmoxTemp = await getProxmoxTemps();
+        const newDevices = await checkForNewDevices();
 
         let reply = ``
         
@@ -23,16 +24,19 @@ export default {
         reply += `Motherboard Zone 1: ${proxmoxTemp.zone1}\n`
         reply += `CPU: ${proxmoxTemp.cpu}\n\n`
         
-        reply += `**📡  Network Status**\n`;
-        reply += `Total Connected Clients: ${totalNetworkUsers}\n\n`;
 
         reply += `**🧠  CPU**\n`;
         reply += `Usage Percentage: ${cpuUsagePercent}%\n`;
         reply += `Temp: ${proxmoxTemp.cpu}\n\n`
         
-        
         reply += `**💾  Memory Usage**\n`;
         reply += `${memoryUsageGB}\n\n`;
+
+        reply += `**📡  Network Status**\n\n`;
+        reply += `${newDevices}\n`
+        reply += `📱 Total Connected Clients: **${totalNetworkUsers}**\n`;
+
+
 
     //   reply += `**UniFi Device Temperatures:**\n`;
     //   deviceTemps.forEach(d => {
