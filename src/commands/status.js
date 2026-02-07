@@ -11,11 +11,11 @@ export default {
     //     getProxmoxTemps()
     //   ]);
 
-        const totalNetworkUsers = await getTotalUniFiUsers();
+        const totalNetworkUsersCount = await getTotalUniFiUsers();
+        const allNetworkDevices = await checkForNewDevices();
         const memoryUsageGB = await getMemoryUsageGB();
         const cpuUsagePercent = await getCpuUsagePercent();
         const proxmoxTemp = await getProxmoxTemps();
-        const newDevices = await checkForNewDevices();
 
         let reply = ``
         
@@ -33,8 +33,8 @@ export default {
         reply += `${memoryUsageGB}\n\n`;
 
         reply += `**📡  Network Status**\n\n`;
-        reply += `${newDevices}\n`
-        reply += `📱 Total Connected Clients: **${totalNetworkUsers}**\n`;
+        reply += `${allNetworkDevices}\n`
+        reply += `📱 Total Connected Clients: **${totalNetworkUsersCount}**\n`;
 
 
 

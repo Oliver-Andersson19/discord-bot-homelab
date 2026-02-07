@@ -66,7 +66,25 @@ export async function checkForNewDevices() {
         return `${wired === "true" ? '🔌' : '📶'}  **${name}** on Network: **${network}** - IP: **${ip}** \n`;
     })
 
+    return clients.join('');
+}
+
+export async function checkForNewDevicesRaw() {
+    const result = await fetchPrometheus('unpoller_client_uptime_seconds');
+    if (!result || result.length === 0) return 'No clients data';
+
+    const clients = result.map((c) => {   
+        const name = c.metric.name || 'Unknown device';
+        const wired = c.metric.wired || 'Unknown';
+        const network = c.metric.network || 'Unknown'
+        const ip = c.metric.ip || 'Unknown'
+        const mac = c.metric.mac || 'Unknown'
+        
+
+        return {name, wired, network, ip, mac};
+    })
+
     console.log(clients)
 
-    return clients.join('');
+    return clients;
 }
