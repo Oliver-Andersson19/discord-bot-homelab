@@ -6,4 +6,4 @@ services:
     restart: unless-stopped
     environment:
       DISCORD_TOKEN: ${DISCORD_TOKEN}
-      PROMETHEUS_URL: ${CLIENT_ID}
+      PROMETHEUS_URL: ${PROMETHEUS_URL}
